@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: order-client
+
+server:
+  port: 8763
+  servlet:
+    context-path: /order
+
+eureka:
+#  instance:
+#    hostname: 127.0.0.1
+  client:
+#    注册到注册中心
+    registerWithEureka: true
+#    需要从eureka获取注册信息
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+# 负载均衡策略 默认轮训
+#user-client:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
