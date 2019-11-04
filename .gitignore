@@ -1,0 +1,4 @@
+# Project exclude paths
+/parent-demo/eureka-demo/target/
+/parent-demo/order-demo/target/
+/parent-demo/user-demo/target/
