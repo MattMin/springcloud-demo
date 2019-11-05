@@ -4,6 +4,9 @@ import com.mzyupc.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author mzyupc@163.com
  * @date 2019/11/4 11:34:57
@@ -31,5 +34,15 @@ public class UserController {
     @PostMapping("/user2")
     public String getUser2(@RequestBody UserVO user){
         return "ok! " + user;
+    }
+
+    @GetMapping("/userAll")
+    public List<String> getUsedAll(@RequestParam List<Integer> ids){
+        List users = new ArrayList();
+        for (Integer id : ids) {
+            users.add("用户: " + id);
+        }
+
+        return users;
     }
 }

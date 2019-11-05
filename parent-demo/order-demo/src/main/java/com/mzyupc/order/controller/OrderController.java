@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * @author mzyupc@163.com
@@ -82,6 +83,19 @@ public class OrderController {
     @GetMapping("/pool")
     public String pool() throws ExecutionException, InterruptedException {
         return orderService.testPool();
+    }
+
+    @GetMapping("/requestMerge")
+    public String requestMerge() throws ExecutionException, InterruptedException {
+        HystrixRequestContext context = HystrixRequestContext.initializeContext();
+
+        Future<String> one = orderService.findUser(1);
+        Future<String> one1 = orderService.findUser(2);
+        Future<String> one2 = orderService.findUser(3);
+        String format = String.format("one: %s, one1: %s, one2: %s", one.get(), one1.get(), one2.get());
+
+        context.close();
+        return format;
     }
 
 }

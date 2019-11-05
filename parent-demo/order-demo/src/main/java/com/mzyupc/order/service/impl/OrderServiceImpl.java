@@ -4,14 +4,18 @@ import com.mzyupc.order.service.OrderService;
 import com.mzyupc.order.service.impl.cache.CacheCommand;
 import com.mzyupc.order.service.impl.pool.OrderCommand;
 import com.mzyupc.order.service.impl.pool.UserCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCollapser;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheKey;
 import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheRemove;
 import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheResult;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -104,5 +108,34 @@ public class OrderServiceImpl implements OrderService {
         Future<String> queue = userCommand1.queue();
 
         return String.format("同步调用结果: %s; %s; %s. 异步调用结果: %s", value1, value2, value3, queue.get());
+    }
+
+    /**
+     * 被合并的请求
+     *
+     * @return
+     */
+    @Override
+    @HystrixCollapser(batchMethod = "findUserAll", collapserProperties = {
+            // 合并的时间范围
+            @HystrixProperty(name = "timerDelayInMilliseconds", value = "300")
+    })
+    public Future<String> findUser(Integer id){
+        System.out.println("被合并的请求");
+        return null;
+    }
+
+    /**
+     * 合并的请求
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    @HystrixCommand
+    public List<String> findUserAll(List<Integer> ids) {
+        System.out.println("合并的请求");
+        String url = "http://user-client/user/userAll?ids={1}";
+        return restTemplate.getForObject(url, List.class, StringUtils.join(ids, ","));
     }
 }

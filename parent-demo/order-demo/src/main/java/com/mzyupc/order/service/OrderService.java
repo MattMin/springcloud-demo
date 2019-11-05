@@ -1,8 +1,8 @@
 package com.mzyupc.order.service;
 
-import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheKey;
-
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * @author mzyupc@163.com
@@ -21,4 +21,16 @@ public interface OrderService {
     void clearRequestCache(String cacheKey);
 
     String testPool() throws ExecutionException, InterruptedException;
+
+    Future<String> findUser(Integer id);
+
+    /**
+     * 查询所有用户
+     *
+     * @param ids
+     * @return
+     */
+    List<String> findUserAll(List<Integer> ids);
+
+
 }
