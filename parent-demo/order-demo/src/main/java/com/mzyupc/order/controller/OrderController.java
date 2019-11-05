@@ -3,6 +3,7 @@ package com.mzyupc.order.controller;
 import com.mzyupc.order.service.OrderFeignService;
 import com.mzyupc.order.service.OrderService;
 import com.mzyupc.order.vo.UserVO;
+import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +32,18 @@ public class OrderController {
     public String newOrder(String name, Integer id){
         String user = orderService.getUser(id);
         return "order: " + name + ", user: " +  user;
+    }
+
+    @GetMapping("/getUserCache")
+    public String getUserCache(){
+        // Hystrix请求上下文, 在一个上下文中缓存有效
+        HystrixRequestContext context = HystrixRequestContext.initializeContext();
+
+        String user1 = orderService.getUser2("cacheKey", 1);
+        String user2 = orderService.getUser2("cacheKey", 2);
+
+        context.close();
+        return String.format("user1: %s; user2: %s", user1, user2);
     }
 
     /**

@@ -12,5 +12,7 @@ public interface OrderService {
 
     String getUser(Integer id);
 
+    String getUser2(String cacheKey, Integer id);
+
     String testPool() throws ExecutionException, InterruptedException;
 }

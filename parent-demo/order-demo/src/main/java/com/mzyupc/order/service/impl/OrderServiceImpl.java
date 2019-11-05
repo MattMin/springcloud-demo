@@ -1,6 +1,7 @@
 package com.mzyupc.order.service.impl;
 
 import com.mzyupc.order.service.OrderService;
+import com.mzyupc.order.service.impl.cache.CacheCommand;
 import com.mzyupc.order.service.impl.pool.OrderCommand;
 import com.mzyupc.order.service.impl.pool.UserCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -19,7 +20,7 @@ import java.util.concurrent.Future;
  */
 @Service
 public class OrderServiceImpl implements OrderService {
-    private static final String GET_USER_URL = "http://user-client/user/user/{id}";
+    public static final String GET_USER_URL = "http://user-client/user/user/{id}";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -29,6 +30,15 @@ public class OrderServiceImpl implements OrderService {
     @HystrixCommand(fallbackMethod = "getUserFallBack")
     public String getUser(Integer id) {
         return restTemplate.getForObject(GET_USER_URL, String.class, id);
+    }
+
+    @Override
+    public String getUser2(String cacheKey, Integer id) {
+        CacheCommand cacheCommand = new CacheCommand(id, cacheKey, restTemplate);
+        String result = cacheCommand.execute();
+        // 清空缓存
+//        cacheCommand.clearRequestCache();
+        return result;
     }
 
     /**
@@ -61,7 +71,6 @@ public class OrderServiceImpl implements OrderService {
         String value3 = orderCommand2.execute();
 
         // 异步调用
-
         Future<String> queue = userCommand1.queue();
 
         return String.format("同步调用结果: %s; %s; %s. 异步调用结果: %s", value1, value2, value3, queue.get());
