@@ -5,6 +5,9 @@ import com.mzyupc.order.service.impl.cache.CacheCommand;
 import com.mzyupc.order.service.impl.pool.OrderCommand;
 import com.mzyupc.order.service.impl.pool.UserCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheKey;
+import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheRemove;
+import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -46,6 +49,26 @@ public class OrderServiceImpl implements OrderService {
         // 清空缓存
 //        cacheCommand.clearRequestCache();
         return result;
+    }
+
+    /**
+     *  hystrix 请求缓存 基于注解的方式
+     *
+     * @param cacheKey
+     * @param id
+     * @return
+     */
+    @Override
+    @CacheResult
+    @HystrixCommand(commandKey = "cache-user")
+    public String getUser3(@CacheKey String cacheKey, Integer id) {
+        return restTemplate.getForObject(GET_USER_URL, String.class, id);
+    }
+
+    @Override
+    @CacheRemove(commandKey = "cache-user")
+    @HystrixCommand
+    public void clearRequestCache(@CacheKey String cacheKey){
     }
 
     /**

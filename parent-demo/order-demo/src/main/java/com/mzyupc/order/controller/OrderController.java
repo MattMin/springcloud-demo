@@ -46,6 +46,18 @@ public class OrderController {
         return String.format("user1: %s; user2: %s", user1, user2);
     }
 
+    @GetMapping("/getUserCache2")
+    public String getUserCache2(){
+        String cacheKey = "cacheKey";
+        HystrixRequestContext context = HystrixRequestContext.initializeContext();
+        String user1 = orderService.getUser3(cacheKey, 1);
+        // 清除缓存
+//        orderService.clearRequestCache(cacheKey);
+        String user2 = orderService.getUser3(cacheKey, 2);
+        context.close();
+        return String.format("user1: %s; user2: %s", user1, user2);
+    }
+
     /**
      * 使用feign调用生产者
      *
