@@ -9,4 +9,6 @@ package com.mzyupc.order.service;
 public interface OrderService {
 
     String getUser(Integer id);
+
+    String testPool();
 }

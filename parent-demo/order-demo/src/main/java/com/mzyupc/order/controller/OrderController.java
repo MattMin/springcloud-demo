@@ -51,4 +51,10 @@ public class OrderController {
         userVO.setName("小花");
         return feignService.getUser2(userVO);
     }
+
+    @GetMapping("/pool")
+    public String pool(){
+        return orderService.testPool();
+    }
+
 }
