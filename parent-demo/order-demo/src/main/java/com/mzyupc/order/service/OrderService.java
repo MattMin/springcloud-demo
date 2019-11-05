@@ -1,5 +1,7 @@
 package com.mzyupc.order.service;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * @author mzyupc@163.com
  * @date 2019/11/4 13:46:33
@@ -10,5 +12,5 @@ public interface OrderService {
 
     String getUser(Integer id);
 
-    String testPool();
+    String testPool() throws ExecutionException, InterruptedException;
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * @author mzyupc@163.com
  * @date 2019/11/4 13:42:17
@@ -53,7 +55,7 @@ public class OrderController {
     }
 
     @GetMapping("/pool")
-    public String pool(){
+    public String pool() throws ExecutionException, InterruptedException {
         return orderService.testPool();
     }
 
