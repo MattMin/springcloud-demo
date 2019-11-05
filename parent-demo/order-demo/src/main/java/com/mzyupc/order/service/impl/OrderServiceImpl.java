@@ -32,6 +32,13 @@ public class OrderServiceImpl implements OrderService {
         return restTemplate.getForObject(GET_USER_URL, String.class, id);
     }
 
+    /**
+     * hystrix 请求缓存 基于继承HystrixCommand的方式
+     *
+     * @param cacheKey
+     * @param id
+     * @return
+     */
     @Override
     public String getUser2(String cacheKey, Integer id) {
         CacheCommand cacheCommand = new CacheCommand(id, cacheKey, restTemplate);
