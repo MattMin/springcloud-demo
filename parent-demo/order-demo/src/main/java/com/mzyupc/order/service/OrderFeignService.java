@@ -1,5 +1,6 @@
 package com.mzyupc.order.service;
 
+import com.mzyupc.order.service.impl.fallback.OrderFeignFallBackServiceImpl;
 import com.mzyupc.order.vo.UserVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  *
  * 使用feign进行远程调用
  */
-@FeignClient(value = "user-client")
+@FeignClient(value = "user-client", fallback = OrderFeignFallBackServiceImpl.class)
 public interface OrderFeignService {
 
     @GetMapping(value = "/user/user/{id}")
