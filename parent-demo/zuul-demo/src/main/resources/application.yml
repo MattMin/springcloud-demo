@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: zuul-client
+
+server:
+  port: 8888
+  servlet:
+    context-path: /zuul
+
+eureka:
+#  instance:
+#    hostname: 127.0.0.1
+  client:
+#    注册到注册中心
+#    registerWithEureka: true
+#    需要从eureka获取注册信息
+#    fetchRegistry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+zuul:
+  routes:
+    # 路由名字(自定义)
+    api-order:
+      # 请求 /api-order 会代理为请求 order-client
+      path: /api-order/**
+      serviceId: order-client
+    # 路由名字(自定义)
+    api-user:
+      path: /api-user/**
+      serviceId: user-client
+    # 配置URL映射
+    map-url:
+      path: /map-url/**
+      url: http://www.baidu.com
+    # 自定义serviceId, 配置负载均衡, 开启此配置 要添加 ribbon.eureka.enabled=false 与 lb-url服务列表
+#    load-balance-url:
+#      path: /lb-url/**
+#      serviceId: lb-url
+  # 禁止使用serviceId访问, 只能通过path访问
+  ignored-services: "*"
+  # 统一前缀
+#  prefix: /mzyupc
+
+# ribbon.eureka.enabled=false, 自定义serviceId负载均衡url生效, eureka serviceId失效
+#ribbon:
+#  eureka:
+#    enabled: false
+
+# load-balance-api -> serviceId 服务列表
+#lb-url:
+#  ribbon:
+#    listOfServers: http://127.0.0.1:8762,http://127.0.0.1:8772
