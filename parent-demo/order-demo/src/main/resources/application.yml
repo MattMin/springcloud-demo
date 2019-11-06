@@ -18,6 +18,7 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka/
 
+# 使用feign远程调用时, 开启请求熔断功能
 feign:
   hystrix:
     enabled: true
