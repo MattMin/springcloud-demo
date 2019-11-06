@@ -1,0 +1,20 @@
+server:
+  port: 8889
+  servlet:
+    context-path: /config
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/MattMin/springcloud-demo.git
+          # 扫描/config文件夹下的配置
+          search-paths: config
+          # 公开的项目可不写
+          username:
+          password:
+      label: master
+

@@ -12,6 +12,8 @@
         <module>user-demo</module>
         <module>order-demo</module>
         <module>zuul-demo</module>
+        <module>config-server-demo</module>
+        <module>config-client-demo</module>
     </modules>
     <packaging>pom</packaging>
 

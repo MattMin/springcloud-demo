@@ -1,0 +1,16 @@
+spring:
+  application:
+    # 远程配置文件名={spring.application.name}-{env}.yml
+    # 环境名 env = dev/test/pro
+    name: config-client
+  cloud:
+    config:
+      uri: http://127.0.0.1:8889/config
+      profile: dev
+      label: master
+
+server:
+  port: 8890
+  servlet:
+    context-path: /config-client
+
