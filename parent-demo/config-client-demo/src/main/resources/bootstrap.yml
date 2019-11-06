@@ -1,7 +1,7 @@
 spring:
   application:
-    # 远程配置文件名={spring.application.name}-{env}.yml
-    # 环境名 env = dev/test/pro
+    # 远程配置文件名={spring.application.name}-{profile}.yml
+    # name命名时要与配置文件对应好
     name: config-client
   cloud:
     config:
