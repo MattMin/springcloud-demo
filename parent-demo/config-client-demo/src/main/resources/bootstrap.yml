@@ -10,6 +10,7 @@ spring:
     name: config-client
   cloud:
     config:
+      # 配置中心地址
       uri: http://127.0.0.1:8889/config
       profile: dev
       label: master
