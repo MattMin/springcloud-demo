@@ -17,7 +17,7 @@
 5. Hystrix 请求熔断/服务降级/依赖隔离/请求缓存
 6. Spring-Cloud-Config分布式配置中心以及其集群操作
 7. Zuul 路由网关
-8. Zuul 整合Swagger使用
+8. [Zuul 整合Swagger使用](https://github.com/MattMin/springcloud-demo/commit/c0f9164ea63dc7946f618c0023a3f963ab6e93bf)
 
 ## 依赖服务
 - rabbitmq
