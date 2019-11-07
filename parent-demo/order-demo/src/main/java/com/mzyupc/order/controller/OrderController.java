@@ -4,6 +4,8 @@ import com.mzyupc.order.service.OrderFeignService;
 import com.mzyupc.order.service.OrderService;
 import com.mzyupc.order.vo.UserVO;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import java.util.concurrent.Future;
  * @author mzyupc@163.com
  * @date 2019/11/4 13:42:17
  */
+@Api("订单接口")
 @RestController
 public class OrderController {
     @Autowired
@@ -29,6 +32,7 @@ public class OrderController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "新建订单", response = String.class)
     @GetMapping("/newOrder")
     public String newOrder(String name, Integer id){
         String user = orderService.getUser(id);
