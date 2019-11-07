@@ -1,7 +1,7 @@
 server:
   port: 8889
-  servlet:
-    context-path: /config
+#  servlet:
+#    context-path: /config
 
 spring:
   application:
@@ -18,3 +18,12 @@ spring:
           password:
       label: master
 
+# 配置eureka注册中心
+eureka:
+  client:
+    # 注册到注册中心 默认true
+    registerWithEureka: true
+    # 需要从eureka获取注册信息 默认true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/

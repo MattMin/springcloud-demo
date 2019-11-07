@@ -1,5 +1,5 @@
 server:
-  port: 8891
+  port: 8892
   servlet:
     context-path: /config-client
 
@@ -11,10 +11,15 @@ spring:
   cloud:
     config:
       # 配置中心地址
-      uri: http://127.0.0.1:8889/config
+#      uri: http://127.0.0.1:8889/  此配置在配置中心单机时使用, 开启discovery(配置中心集群), 要将此配置去掉
       profile: dev
       label: master
-# 消息总线配置
+      discovery:
+        enabled: true
+        # 配置中心service id
+        service-id: config-server
+
+  # 消息总线配置
   rabbitmq:
     # 本地虚拟机中的rabbitmq
     host: 192.168.19.134
@@ -22,10 +27,21 @@ spring:
     username: guest
     password: guest
 
+# 用于刷新配置文件
 management:
   endpoints:
     web:
       exposure:
-        # 手动更新: 调用此链接更新配置文件 POST: http://server-ip:server-port/context-path/actuator/bus-refresh
+        # 手动更新: POST: http://server-ip:server-port/context-path/actuator/bus-refresh
         # 自动更新: GitHub代码仓库添加WebHook
         include: bus-refresh
+
+# 配置eureka注册中心
+eureka:
+  client:
+    # 注册到注册中心 默认true
+    registerWithEureka: true
+    # 需要从eureka获取注册信息 默认true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
