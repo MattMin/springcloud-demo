@@ -20,3 +20,8 @@ eureka:
       # 服务注册中心使用集群方式的配置
 #      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/
 
+#  instance:
+#    # eureka client 向 server发送心跳的时间间隔
+#    lease-renewal-interval-in-seconds: 1
+#    # eureka server 在收到最后一次心跳之后等待的时间上限, 超过则剔除
+#    lease-expiration-duration-in-seconds: 2
