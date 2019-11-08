@@ -1,0 +1,13 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+#    注册到eureka ip地址
+    # 修改host文件, 添加 "127.0.0.1 server1"
+    hostname: server1
+  client:
+    serviceUrl:
+      # server2的地址
+      defaultZone: http://server2:8762/eureka/
+
