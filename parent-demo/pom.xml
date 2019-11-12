@@ -16,6 +16,8 @@
         <module>config-client-demo</module>
         <module>zookeeper-user-demo</module>
         <module>zookeeper-order-demo</module>
+        <module>consul-user-demo</module>
+        <module>consul-order-demo</module>
     </modules>
     <packaging>pom</packaging>
 

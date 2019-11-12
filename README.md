@@ -9,6 +9,8 @@
     - zuul-demo 路由网关
     - zookeeper-order-demo spring-cloud整合zookeeper作为注册中心
     - zookeeper-user-demo spring-cloud整合zookeeper作为注册中心
+    - consul-order-demo spring-cloud整合consul作为注册中心, DiscoveryClient接口使用
+    - consul-user-demo spring-cloud整合consul作为注册中心
 - config 分布式配置文件存放路径, 供config-server-demo扫描
 
 ## 涵盖内容
@@ -24,7 +26,7 @@
 ## 依赖服务
 - rabbitmq
     - 使用rabbitmq:management docker镜像
-    ```
+    ```shell script
   # 拉取镜像
   docker pull rabbitmq:management
   # 启动镜像, 15672为管理平台端口, 5672为服务端口
@@ -33,7 +35,12 @@
   ```
 - zookeeper
     - zookeeper使用 本地虚拟机(192.168.19.128)docker镜像
-    ```$xslt
+    ```shell script
     docker pull zookeeper
     docker run --name zk -d -p 2181:2181 --restart always zookeeper:latest
+    ```
+ - consul
+    ```shell script
+    docker pull consul
+    docker run -d --name=dev-consul -p 8500:8500 -e CONSUL_BIND_INTERFACE=eth0 consul
     ```

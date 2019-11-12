@@ -1,0 +1,16 @@
+server:
+  port: 8765
+
+spring:
+  application:
+    # 服务名称
+    name: cs-order
+  cloud:
+    consul:
+      discovery:
+        # 服务地址
+        hostname: 192.168.8.184
+      # 注册到consul的ip
+      host: 192.168.19.128
+      # consul的端口
+      port: 8500
