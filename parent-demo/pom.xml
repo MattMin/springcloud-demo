@@ -14,6 +14,8 @@
         <module>zuul-demo</module>
         <module>config-server-demo</module>
         <module>config-client-demo</module>
+        <module>zookeeper-user-demo</module>
+        <module>zookeeper-order-demo</module>
     </modules>
     <packaging>pom</packaging>
 

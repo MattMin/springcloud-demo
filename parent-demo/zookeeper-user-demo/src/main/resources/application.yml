@@ -1,0 +1,13 @@
+server:
+  port: 8765
+  servlet:
+    context-path: /zk-user
+
+spring:
+  application:
+    # 服务名称
+    name: zk-user
+  cloud:
+    zookeeper:
+      # 注册到zookeeper的地址
+      connect-string: 192.168.19.128:2181
