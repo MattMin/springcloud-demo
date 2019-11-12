@@ -22,6 +22,8 @@
 6. Spring-Cloud-Config分布式配置中心以及其集群操作
 7. Zuul 路由网关
 8. Zuul 整合Swagger使用
+9. spring-cloud 整合zookeeper/consul作为服务注册中心使用
+10. DiscoveryClient接口使用
 
 ## 依赖服务
 依赖服务均使用Docker镜像搭建
