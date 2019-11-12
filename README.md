@@ -24,8 +24,9 @@
 8. Zuul 整合Swagger使用
 
 ## 依赖服务
+依赖服务均使用Docker镜像搭建
+
 - rabbitmq
-    - 使用rabbitmq:management docker镜像
     ```shell script
   # 拉取镜像
   docker pull rabbitmq:management
@@ -33,12 +34,14 @@
   # 默认用户名:密码 guest:guest
   docker run -d --hostname my-rabbit --name rabbit -p 15672:15672 -p 5672:5672 --restart always rabbitmq:management
   ```
+  
 - zookeeper
     - zookeeper使用 本地虚拟机(192.168.19.128)docker镜像
     ```shell script
     docker pull zookeeper
     docker run --name zk -d -p 2181:2181 --restart always zookeeper:latest
     ```
+  
  - consul
     ```shell script
     docker pull consul
