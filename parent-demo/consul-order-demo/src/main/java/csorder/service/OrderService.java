@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @date 2019/11/12 11:11:59
  */
 
-// value=serviceId, pat=contextPath + controllerPath
+// value=serviceId, path=contextPath + controllerPath
 @FeignClient(value = "cs-user")
 public interface OrderService {
 
