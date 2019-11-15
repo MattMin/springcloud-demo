@@ -18,6 +18,7 @@
         <module>zookeeper-order-demo</module>
         <module>consul-user-demo</module>
         <module>consul-order-demo</module>
+        <module>feign-parent-demo</module>
     </modules>
     <packaging>pom</packaging>
 
