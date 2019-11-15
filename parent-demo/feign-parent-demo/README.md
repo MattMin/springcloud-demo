@@ -4,9 +4,9 @@
 - order-service
 - order-service-impl
 - user-service 
-- user-service-impl
+- user-service-impl  
  项目间的依赖关系入下图:  
  ![依赖关系](asset/feign-parent-demo.png)
  
-> 　　order-service-impl依赖user-service项目, 是为了使用feign客户端调用时避免写重复代码, 只要在order-service-impl中定义接口然后继承user-service中的接口, 再加上@FeignClient即可  
-> 　　user-service中被Feign调用的接口要加@RequestMapping(@GetMapping/@PutMapping)注解
+> order-service-impl依赖user-service项目, 是为了使用feign客户端调用时避免写重复代码, 只要在order-service-impl中定义接口然后继承user-service中的接口, 再加上@FeignClient即可  
+> user-service中被Feign调用的接口要加@RequestMapping(@GetMapping/@PutMapping)注解

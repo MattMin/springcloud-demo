@@ -11,6 +11,7 @@
     - zookeeper-user-demo spring-cloud整合zookeeper作为注册中心
     - consul-order-demo spring-cloud整合consul作为注册中心, DiscoveryClient接口使用
     - consul-user-demo spring-cloud整合consul作为注册中心
+    - feign-parent-demo Feign客户端调用重构项目
 - config 分布式配置文件存放路径, 供config-server-demo扫描
 
 ## 涵盖内容
